@@ -9,5 +9,7 @@ class CreateTrades < ActiveRecord::Migration
 
       t.timestamps null: false
     end
+
+    add_index :trades, :tid, unique: true
   end
 end
