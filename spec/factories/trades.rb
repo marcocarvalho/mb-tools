@@ -6,14 +6,14 @@ FactoryGirl.define do
     sequence :tid do |n|
       n
     end
-    kind Trade.kinds.values.sample(1).first
+    kind 'sell'
 
     trait :sell do
-      kind Trade.kinds['sell']
+      kind 'sell'
     end
 
     trait :buy do
-      kind Trade.kinds['buy']
+      kind 'buy'
     end
   end
 end
