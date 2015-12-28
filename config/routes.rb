@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
-  resources :trades
+  resources :trades, only: [] do
+    collection do
+      get :last_tid
+    end
+  end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
