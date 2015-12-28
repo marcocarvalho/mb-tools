@@ -5,7 +5,5 @@ class Trade < ActiveRecord::Base
   scope :last_tid, -> { tid_order.last }
 
   validates :date, :tid, :kind, :amount, :price, presence: true
-  validates :tid, numericality: { only_integer: true }
-  validates :amount, :price, numericality: true
   validates :kind, inclusion: { in: ['buy', 'sell'] }
 end

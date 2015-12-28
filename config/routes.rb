@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :trades, only: [] do
+  resources :trades, only: [:create] do
     collection do
       get :last_tid
     end
