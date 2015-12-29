@@ -14,4 +14,8 @@ class ApiToken < ActiveRecord::Base
   def self.create_ephemeral_token(user)
     create(user: user, token: SecureRandom.uuid, valid_until: 1.day.since)
   end
+
+  def self.destroy_invalid
+    where('valid_until <= ?', Time.current).destroy_all
+  end
 end
