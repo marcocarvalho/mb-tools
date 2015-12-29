@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151228154108) do
+ActiveRecord::Schema.define(version: 20151229190259) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,11 +19,14 @@ ActiveRecord::Schema.define(version: 20151228154108) do
 
   create_table "api_tokens", force: :cascade do |t|
     t.uuid     "token"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "user_id"
+    t.datetime "valid_until"
   end
 
   add_index "api_tokens", ["token"], name: "index_api_tokens_on_token", unique: true, using: :btree
+  add_index "api_tokens", ["user_id"], name: "index_api_tokens_on_user_id", using: :btree
 
   create_table "trades", force: :cascade do |t|
     t.datetime "date"
@@ -36,5 +39,14 @@ ActiveRecord::Schema.define(version: 20151228154108) do
   end
 
   add_index "trades", ["tid"], name: "index_trades_on_tid", unique: true, using: :btree
+
+  create_table "users", force: :cascade do |t|
+    t.string   "email",      null: false
+    t.string   "password",   null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
 
 end
