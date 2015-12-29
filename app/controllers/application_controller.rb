@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   def current_user
-    params[:api_token]
+    params[:token]
   end
 
   private

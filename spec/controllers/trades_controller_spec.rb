@@ -1,11 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe TradesController, type: :controller do
+  let!(:token) { create(:api_token).token }
+
   context '#last_tid' do
     let!(:list) { create_list(:trade, 2) }
 
     it 'fetch last tid' do
-      get :last_tid
+      get :last_tid, token: token
       expect(JSON.parse(response.body)['tid']).to eq(list.last.tid)
     end
   end
@@ -17,7 +19,7 @@ RSpec.describe TradesController, type: :controller do
       result = nil
 
       expect {
-        post :create, valid.serializable_hash
+        post :create, { token: token }.merge(valid.serializable_hash)
         result = JSON.parse(response.body)
       }.to change { Trade.count }.by(1)
 
@@ -29,7 +31,7 @@ RSpec.describe TradesController, type: :controller do
       result = nil
 
       expect do
-        post :create, valid.serializable_hash(except: [:tid])
+        post :create, { token: token}.merge(valid.serializable_hash(except: [:tid]))
         result = JSON.parse(response.body)
       end.not_to change { Trade.count }
 

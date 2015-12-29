@@ -1,5 +1,6 @@
 class TradesController < ApplicationController
   def create
+    authorize Trade
     trade = Trade.create(parsed_trade_params)
     if trade.errors.any?
       render json: { success: false, errors: trade.errors.to_hash }
@@ -9,6 +10,7 @@ class TradesController < ApplicationController
   end
 
   def last_tid
+    authorize Trade
     render json: { tid: _last_tid.tid }
   end
 
