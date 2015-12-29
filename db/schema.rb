@@ -11,10 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151227194612) do
+ActiveRecord::Schema.define(version: 20151228154108) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "uuid-ossp"
+
+  create_table "api_tokens", force: :cascade do |t|
+    t.uuid     "token"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "api_tokens", ["token"], name: "index_api_tokens_on_token", using: :btree
 
   create_table "trades", force: :cascade do |t|
     t.datetime "date"
