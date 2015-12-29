@@ -7,6 +7,6 @@ class CreateApiTokens < ActiveRecord::Migration
 
       t.timestamps null: false
     end
-    add_index :api_tokens, :token
+    add_index :api_tokens, :token, unique: true
   end
 end

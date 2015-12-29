@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(version: 20151228154108) do
     t.datetime "updated_at", null: false
   end
 
-  add_index "api_tokens", ["token"], name: "index_api_tokens_on_token", using: :btree
+  add_index "api_tokens", ["token"], name: "index_api_tokens_on_token", unique: true, using: :btree
 
   create_table "trades", force: :cascade do |t|
     t.datetime "date"
