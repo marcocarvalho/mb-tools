@@ -1,6 +1,5 @@
 FactoryGirl.define do
   factory :api_token do
-    token ""
+    token { SecureRandom.uuid }
   end
-
 end
