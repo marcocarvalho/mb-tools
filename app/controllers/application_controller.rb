@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   include Pundit
-  after_action :verify_authorized, except: [:auth]
+  after_action :verify_authorized, except: [:auth, :root]
 
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
@@ -14,6 +14,10 @@ class ApplicationController < ActionController::Base
     else
       user_not_authorized
     end 
+  end
+
+  def root
+    render json: { messages: ['must auth first'] }
   end
 
   protected
