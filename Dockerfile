@@ -17,5 +17,5 @@ COPY . /usr/src/app
 
 EXPOSE 80
 CMD ["bundle", "exec", "rake", "db:create", "db:migrate"]
-CMD ["service", "nginx", "restart"]
+CMD ["nginx"]
 CMD ["bundle", "exec", "unicorn", "-c", "config/unicorn.rb"]
