@@ -12,11 +12,12 @@ COPY Gemfile.lock /usr/src/app/
 RUN bundle install --frozen --without test development
 RUN mkdir -p tmp
 
+RUN gem install foreman
+
 COPY . /usr/src/app
 
 # RUN ["bundle", "exec", "rake", "assets:precompile"]
 
 EXPOSE 80
-CMD ["service", "nginx", "restart"]
 CMD ["bundle", "exec", "rake", "db:create", "db:migrate"]
-CMD ["bundle", "exec", "unicorn", "-c", "config/unicorn.rb"]
+CMD ["foreman", "start", "-f", "Procfile"]
