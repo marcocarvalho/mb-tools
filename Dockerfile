@@ -9,7 +9,7 @@ RUN service nginx restart
 
 COPY Gemfile /usr/src/app/
 COPY Gemfile.lock /usr/src/app/
-RUN bundle install --deployment
+RUN bundle install --frozen --without test development
 RUN update-rc.d nginx defaults
 
 COPY . /usr/src/app
