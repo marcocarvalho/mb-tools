@@ -11,6 +11,7 @@ COPY Gemfile /usr/src/app/
 COPY Gemfile.lock /usr/src/app/
 RUN bundle install --frozen --without test development
 RUN update-rc.d nginx defaults
+RUN mkdir -p tmp
 
 COPY . /usr/src/app
 
